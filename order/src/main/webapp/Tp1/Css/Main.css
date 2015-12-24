@@ -1,0 +1,120 @@
+@charset "utf-8";
+/*设置各项默认值*/
+body
+{margin:0px; padding:0px;font-family:"微软雅黑",Verdana, Arial, Helvetica, Sans-Serif, "宋体"; font-size:12px; color:#333333; background:#fff;}
+/*默认所有的div溢出不显示*/
+div
+{overflow:hidden;}
+/*宋体*/
+.songti
+{font-family:"宋体";}
+.yahei
+{font-family:"微软雅黑";}
+table
+{margin:0px;}
+th,td
+{line-height:180%; text-align:left;}
+img
+{border:0px;}
+dl,dt,dd,h1,h2,h3,h4,p,ul,form
+{margin:0px; padding:0px;}
+ul{list-style:none;}
+
+/*通用链接默认值*/
+a:link{color:#0033FF;text-decoration: none;}
+a:visited{color:#0033FF;text-decoration: none;}
+a:hover,a:active{color:#0033FF;text-decoration:underline;}
+
+.grey a:link{color:#606060;text-decoration: none;}
+.grey a:visited{color:#606060;text-decoration: none;}
+.grey a:hover,.grey a:active{color:#CC0303;text-decoration:underline;}
+
+.black a:link{color:#313330;text-decoration: none;}
+.black a:visited{color:#313330;text-decoration: none;}
+.black a:hover,.black a:active{color:#CC0303;text-decoration:underline;}
+
+.blue a:link{color:#0A71BC;text-decoration: none;}
+.blue a:visited{color:#0A71BC;text-decoration: none;}
+.blue a:hover,.blue a:active{color:#CC0303;text-decoration:underline;}
+
+.white a:link{color:#fff;text-decoration: none;}
+.white a:visited{color:#fff;text-decoration: none;}
+.white a:hover,.white a:active{color:#CC0303;text-decoration:underline;}
+
+.normal a:link{color:#676767;text-decoration: none;}
+.normal a:visited{color:#676767;text-decoration: none;}
+.normal a:hover,.normal a:active{color:#CC0303;text-decoration:underline;}
+/*
+//CSS Hack
+property:value; 所有浏览器 
+_property:value; IE6 
++property:value; IE7
+*property:value; IE6/IE7
+property:value \0; IE8/IE9
+property:value \9; IE6/IE7/IE8
+property:value \9\0; IE9
+
+//最小高度HACK
+min-height:500px; 
+height:auto !important; 
+height:500px; 
+overflow:visible;
+
+//溢出文字用省略号点代替(慎用)
+white-space:nowrap; text-overflow:ellipsis; overflow:hidden;
+
+//文字两端对齐
+text-align:Justify;(火狐)
+text-justify:inter-ideograph;(IE)
+*/
+/*右侧漂浮*/
+#rightPiaoFu
+{width:120px; height:auto; overflow:hidden; padding:6px; font-size:12px; position:absolute;right:0px;}
+#rightPiaoFu .content
+{width:120px; height:auto; overflow:hidden; background-color:#fff; position:relative;}
+#rightPiaoFu .close
+{width:20px; height:20px; overflow:hidden; position:absolute; right:0px; top:0px;
+ color:#fff; cursor:pointer; line-height:20px; text-align:center; font-size:14px;}
+#rightPiaoFu ul
+{list-style:none;}
+#rightPiaoFu ul li.sort
+{width:118px; height:20px; overflow:hidden; border:1px solid #C0E6F9;
+ line-height:20px; text-align:center; color:#fff;}
+#rightPiaoFu ul li.qq,#rightPiaoFu ul li.msn,#rightPiaoFu ul li.skype
+{width:110px; height:auto; overflow:hidden; padding:3px 0px; line-height:23px; text-indent:10px;}
+#rightPiaoFu ul li.tel,#rightPiaoFu ul li.email
+{width:110px; height:auto; overflow:hidden; line-height:23px; text-indent:10px; color:#333; text-align:center;}
+
+#rightPiaoFu a:link{color:#333;text-decoration: none;}
+#rightPiaoFu a:visited{color:#333;text-decoration: none;}
+#rightPiaoFu a:hover,#rightPiaoFu a:active{color:#ff0000;text-decoration:underline;}
+/*留言表单*/
+#GuestBookForm
+{width:800px; height:auto;min-height:400px; overflow:hidden; margin:0px auto; margin-top:20px;  margin-bottom:20px; padding:10px 0px;
+ background-color:#FFF; border:1px solid #C9C9C9;}
+#GuestBookForm .title
+{font-size:14px; font-weight:bold;color:#CC0000; line-height:40px; text-indent:20px}
+#GuestBookForm table th
+{ text-align:right; font-weight:normal; color:#454545;}
+#GuestBookForm table th,#GuestBookForm table td
+{padding:8px; line-height:21px;}
+
+/*留言列表*/
+#GuestBookList
+{width:800px; height:auto; overflow:hidden; margin:0px auto; margin-top:15px;}
+#GuestBookList .one
+{padding-bottom:10px;}
+#GuestBookList .one table
+{background-color:#E4E4E4;}
+#GuestBookList .one table td
+{background-color:#FFFFFF; line-height:21px; padding:8px;}
+#GuestBookList .one table th,#GuestBookList .one table td.title
+{background-color:#F7F7F7; line-height:21px; padding:8px;}
+#GuestBookList .one table th
+{text-align:center; font-weight:normal; color:#454545;}
+#GuestBookList .one table td.repaly
+{color:#CC0000;}
+#GuestBookList .one table td.title em
+{float:left; color:#454545; font-style:normal;}
+#GuestBookList .one table td.title span
+{float:right; color:#666; font-size:11px;}
