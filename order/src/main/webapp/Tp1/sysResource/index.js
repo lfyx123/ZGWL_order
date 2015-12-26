@@ -152,15 +152,62 @@ $(function() {
 	 * 查询条件选中事件
 	 */
 	$('#ConitionKHDDul').on('click','li',function() {
+		var F_XMLXBH = $($(this).find('.F_XMLXBH')[0]).text();
+		var F_KHQSD = $($(this).find('.F_KHQSD')[0]).text();
+		var F_KFZYD = $($(this).find('.F_KFZYD')[0]).text();
+		var F_KHDDBH = $("#KHDDtxt").val();
 		$('.Conition').hide();
-		$('.Display').hide()
+		$('.Display').hide();
+		var data = {};
+		data['F_XMLXBH'] = F_XMLXBH;
+		data['F_KHQSD'] = F_KHQSD;
+		data['F_KFZYD'] = F_KFZYD;
+		data['F_KHDDBH'] = F_KHDDBH;
+		$.ajax({
+			type : 'post',
+			url : "http://localhost:8081/new_frame/order/orderfun",
+			dataType : 'jsonp',
+			jsonpCallback : 'callback',
+			data : data,
+			contentType:'application/json;charset=utf-8',
+			success : function(json) {
+				console.log(json);
+				$('#F_XMLXMCSpan').html(json['resultMap']['KHDD']['XMMC']);
+				$('#F_KHQSDSpan').html(json['resultMap']['KHDD']['KHQSD']);
+				$('#LCSpan').html(json['resultMap']['KHDD']['LC']);
+				$('#JJCDSpan').html(json['resultMap']['KHDD']['JJCD']);
+				$('#YSLXSpan').html(json['resultMap']['KHDD']['YSLX']);
+				$('#WLLXSpan').html(json['resultMap']['KHDD']['WLLX']);
+				$('#KFZYDSpan').html(json['resultMap']['KHDD']['KFZYD']);
+				
+				var str="";
+				$.each(json['resultMap']['KHQSDList'],function(index,value){
+					console.log(this['F_KHQSD']);
+					if(index==0)
+					{
+						str = str + "<li class='newline'><p>"+this['F_KHQSD']+"</p></li>";
+					}
+					else if(index%7==0)
+					{
+						str = str + "<li class='track newline'><p>"+this['F_KHQSD']+"</p></li>";
+					}
+					else
+					{
+						str = str + "<li class='margin newline'><p>"+this['F_KHQSD']+"</p></li>";
+					}
+				});
+				$('#KHQSDUl').html(str);
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+			}
+		});
 	});
 	
 	/**
 	 * @author LYL
 	 * @date 2015年12月20日
 	 */
-	$("#searchOrder").on("click", function() {
+	/*$("#searchOrder").on("click", function() {
 		$.ajax({
 			type : 'post',
 			url : "http://localhost:8081/new_frame/order/orderfun",
@@ -176,7 +223,7 @@ $(function() {
 			}
 		});
 
-	})
+	})*/
 
 	/**
 	 * @author LYL
@@ -197,8 +244,8 @@ $(function() {
 									success : function(data) {
 										var str ="";
 										$.each(data.resultMap.KHDDList, function(name, value) {
-											str = str + '<li class="ConitionLi"><span>'+value.F_XMLXMC+'</span>'
-												+ '<span>'+value.F_KHQSD+'</span> <span>'+value.F_KFZYD+'</span> <span>'+value.F_SHLLR+'</span>'
+											str = str + '<li class="ConitionLi"><span>'+value.F_XMLXMC+'</span>'+'<span class="F_XMLXBH">'+value.F_XMLXBH+'</span>'
+												+ '<span class="F_KHQSD">'+value.F_KHQSD+'</span> <span class="F_KFZYD">'+value.F_KFZYD+'</span> <span>'+value.F_SHLLR+'</span>'
 												+ '<span>'+value.F_SHRLLFS+'</span></li>';
 										     
 										});

@@ -169,33 +169,33 @@ body {
 						<div class="fixed Font_Color TopColor">
 							<ul>
 								<li><p>项目名称</p>
-									<span>精品特曲</span></li>
+									<span id="F_XMLXMCSpan"></span></li>
 								<li><p>客户签收单</p>
-									<span>30157004</span></li>
+									<span id="F_KHQSDSpan"></span></li>
 								<li><p>发送方</p>
 									<span>中国物流有限公司</span></li>
 								<li><p>总路程数</p>
-									<span>44.2千米</span></li>
+									<span id="LCSpan"></span></li>
 							</ul>
 						</div>
 						<div class="fixed Font_Color TopColor">
 							<ul>
 								<li><p>紧急程度</p>
-									<span>普通</span></li>
+									<span id='JJCDSpan'></span></li>
 								<li><p>运输类型</p>
-									<span>门到门</span></li>
+									<span id='YSLXSpan'>门到门</span></li>
 							</ul>
 						</div>
 						<div class="fixed Font_Color TopColor">
 							<ul class="Width">
 								<li><p>运输路线</p>
-									<span>(精品特曲)成都青白江到四川省成都市武侯区</span></li>
+									<span id='WLLXSpan'></span></li>
 							</ul>
 						</div>
 						<div class="fixed Font_Color TopColor">
 							<ul class="Width">
 								<li>
-									<p>客房作业单</p> <span>50246592</span> <span>50246592</span> <span>50246592</span>
+									<p>客房作业单</p> <span id='KFZYDSpan'></span>
 								</li>
 							</ul>
 						</div>
@@ -208,15 +208,15 @@ body {
 					<div class="center">
 						<div class="Route">
 							<span class="stateFont ">订单跟踪</span>
-							<ul class="track Top">
-								<li><p>30157004</p></li>
+							<ul class="track Top" id="KHQSDUl">
+								<!-- <li><p>30157004</p></li>
 								<li class="margin"><p>30157004</p></li>
 								<li class="margin"><p>30157004</p></li>
 								<li class="margin"><p>30157004</p></li>
 								<li class="margin"><p>30157004</p></li>
 								<li class="margin"><p>30157004</p></li>
 								<li class="margin"><p>30157004</p></li>
-								<li class="track newline"><p>30157004</p></li>
+								<li class="track newline"><p>30157004</p></li> -->
 							</ul>
 							<ul class="Title Top">
 								<li class="time"><p>时间</p></li>
