@@ -73,35 +73,7 @@ $(function() {
 		$(this).addClass("select");
 	});
 
-	$(".contentNews.elementTwo").click(
-			function() {
-				var ll = $(this).find(".change.Title").attr("class");
-				if (ll == "change Title") {
-					$(this).next(".contentNews.elementOne").addClass("dd");
-					$(this).next().next(".contentNews.elementOne").addClass(
-							"dd");
-					// 2,图标还原
-					$(".Route").find("img").attr("src", "images/JT，1.png");
-					// 3,颜色还原
-					$(".Route").find(".change.Title").addClass("changeColor");
-				} else {
-					// 点击一个ul时,将所有的样式复原
-					// 1,隐藏ul
-					$(".contentNews.elementOne").addClass("dd");
-					// 2,图标还原
-					$(".Route").find("img").attr("src", "images/JT，1.png");
-					// 3,颜色还原
-					$(".Route").find(".change.Title").addClass("changeColor");
-					// 修改当前ul样式
-					$(this).find(".changeColor").removeClass("changeColor");
-					$(this).find("img").attr("src", "images/JT-1.png");
-					// 展示当前ul的后两个ul
-					$(this).next(".contentNews.elementOne.dd")
-							.removeClass("dd");
-					$(this).next().next(".contentNews.elementOne.dd")
-							.removeClass("dd");
-				}
-			});
+
 
 	$("#ejSlide .list ul li img").each(function() {
 		$(this).css("margin-left", -($(this).attr("oldW") / 2));
@@ -145,6 +117,22 @@ $(function() {
 			$(this).removeClass("ConitionCol");
 		}
 	});
+	
+	/**
+	 * @author LYL
+	 * @date 2015年12月20日
+	 * ???
+	 */
+	$("#DDGZDiv").on('click','.elementOne',
+		function() {
+				$('.elementTwo').addClass('elementOne');
+				$('.elementTwo').find('.change.Title').addClass('changeColor');
+				$('.elementTwo').removeClass('elementTwo');
+				$(this).find('.change.Title.changeColor').removeClass("changeColor");
+				$(this).removeClass('elementOne');
+				$(this).addClass('elementTwo');
+	});
+	
 	
 	/**
 	 * @author LYL
@@ -197,33 +185,61 @@ $(function() {
 					}
 				});
 				$('#KHQSDUl').html(str);
+				
+				var str2 = "";
+				$.each(json['resultMap']['DDGZList'],function(index,value){
+					
+					if(index == 0)
+					{
+						str2 = str2 + '<ul class="contentNews elementTwo">'
+					}else
+					{
+						str2 = str2 + '<ul class="contentNews elementOne">'
+					}
+					
+					str2 = str2 + '<li class="time"><span class="stateFont fontColor">'+this['F_LRSJ']+'</span>'
+						 + '<span class="Hour">16:00</span></li>'
+						 + '<li>';
+					if(index == 0)
+					{
+						str2 = str2 + '<ul class="change Title ">'
+					}else
+					{
+						str2 =str2 + '<ul class="change Title changeColor">'
+					}
+					str2 = str2 + '<li class="newsOne">'
+						 + '<p>'+this['F_BZ']+'</p>'
+						 + '</li>'
+						 + '<li class="name"><p>'+this['F_ZT']+'</p></li>'
+						 + '<li class="name"><p>'+this['CPH']+'</p></li>'
+						 + '<li class="name"><p>'
+						 + this['NAME']+' <img src="images/JT-1.png" />'
+						 + '</p></li>'
+						 + '</ul>'
+						 + '</li>'
+						 + '</ul>';
+				});
+				$('#test').html(str2);
+				
+				$('#F_YSFSSpan').html(json['resultMap']['KHDD']['F_YSFS']);
+				$('#F_PCHSpan').html(json['resultMap']['KHDD']['F_PCH']);
+				
+				var gzzt = json['resultMap']['GZZT'];
+				for(i=1;i<=6;i++)
+				{
+					$("#ZT_"+i).addClass("scheduleBg");
+					$("#ZT_"+i).find('img').attr('src',"images/ZT,"+i+".png");
+					if(i<=gzzt)
+					{
+						$("#ZT_"+i).removeClass("scheduleBg");
+						$("#ZT_"+i).find('img').attr('src',"images/ZT-"+i+".png");
+					}
+				}
 			},
 			error : function(XMLHttpRequest, textStatus, errorThrown) {
 			}
 		});
 	});
-	
-	/**
-	 * @author LYL
-	 * @date 2015年12月20日
-	 */
-	/*$("#searchOrder").on("click", function() {
-		$.ajax({
-			type : 'post',
-			url : "http://localhost:8081/new_frame/order/orderfun",
-			dataType : 'jsonp',
-			jsonpCallback : 'callback',
-			data : {
-				'name' : name
-			},
-			success : function(json) {
-				console.log(json);
-			},
-			error : function(XMLHttpRequest, textStatus, errorThrown) {
-			}
-		});
-
-	})*/
 
 	/**
 	 * @author LYL

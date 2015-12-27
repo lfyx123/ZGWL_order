@@ -135,23 +135,23 @@ body {
 							<span class="stateFont">订单状态<span class="Font">已起运</span></span>
 
 							<ul class="schedule">
-								<li class="first"><img src="images/ZT-1.png" /><span
+								<li class="first scheduleBg" id="ZT_1"><img src="images/ZT,1.png" /><span
 									class="firat"></span>
 								<p class="stateFont">已作成</p></li>
 
-								<li><img src="images/ZT-2.png" /><span></span>
+								<li class="scheduleBg" id="ZT_2"><img src="images/ZT,2.png" /><span></span>
 								<p class="stateFont">已接收</p></li>
 								
-								<li><img src="images/ZT-3.png" /><span></span>
+								<li  class="scheduleBg" id="ZT_3"><img src="images/ZT,3.png" /><span></span>
 								<p class="stateFont">已派车</p></li>
 								
-								<li><img src="images/ZT-3.png" /><span></span>
+								<li class="scheduleBg"  id="ZT_4"><img src="images/ZT,4.png" /><span></span>
 								<p class="stateFont">已起运</p></li>
 
-								<li class="scheduleBg"><img src="images/ZT,3.png" /><span></span>
+								<li class="scheduleBg" id="ZT_5"><img src="images/ZT,5.png" /><span></span>
 								<p class="stateFont">已到达</p></li>
 
-								<li class="scheduleBg"><img src="images/ZT,5.png" />
+								<li class="scheduleBg" id="ZT_6"><img src="images/ZT,6.png" />
 								<p class="stateFont">运输完成</p></li>
 							</ul>
 						</div>
@@ -206,17 +206,9 @@ body {
 			<div id="contentContent">
 				<div id="border">
 					<div class="center">
-						<div class="Route">
+						<div class="Route" id="DDGZDiv">
 							<span class="stateFont ">订单跟踪</span>
 							<ul class="track Top" id="KHQSDUl">
-								<!-- <li><p>30157004</p></li>
-								<li class="margin"><p>30157004</p></li>
-								<li class="margin"><p>30157004</p></li>
-								<li class="margin"><p>30157004</p></li>
-								<li class="margin"><p>30157004</p></li>
-								<li class="margin"><p>30157004</p></li>
-								<li class="margin"><p>30157004</p></li>
-								<li class="track newline"><p>30157004</p></li> -->
 							</ul>
 							<ul class="Title Top">
 								<li class="time"><p>时间</p></li>
@@ -225,137 +217,7 @@ body {
 								<li class="name"><p>车牌号</p></li>
 								<li class="name"><p>跟踪人</p></li>
 							</ul>
-							<ul class="contentNews elementTwo">
-								<li class="time"><span class="stateFont fontColor">2015-12-04</span>
-									<span class="Hour">16:00</span></li>
-								<li>
-									<ul class="change Title ">
-										<li class="newsOne">
-											<p>您的订单已经准备出库，正在经过四川省成都市高新区天府二街198号泸州老窖大厦1903</p> <span>货运单号：11176753698</span>
-											<span>物流联系方式：1898206037</span>
-										</li>
-										<li class="name"><p>派车</p></li>
-										<li class="name"><p>川A2JJ13</p></li>
-										<li class="name"><p>
-												苟凯 <img src="images/JT-1.png" />
-											</p></li>
-									</ul>
-								</li>
-							</ul>
-							<ul class="contentNews elementOne">
-								<li class="time"><span class="stateFont fontColor"></span>
-									<span class="Hour">16:00</span></li>
-								<li>
-									<ul class="change Title changeOne TitleBg">
-										<li class="newsOne">
-											<p>您的订单已经准备出库，正在经过四川省成都市高新区天府二街198号泸州老窖大厦1903</p> <span>货运单号：11176753698</span>
-											<span>物流联系方式：1898206037</span>
-										</li>
-										<li class="name"><p>派车</p></li>
-										<li class="name"><p>川A2JJ13</p></li>
-										<li class="name"><p>苟凯</p></li>
-									</ul>
-								</li>
-							</ul>
-							<ul class="contentNews elementOne">
-								<li class="time"><span class="stateFont fontColor "></span>
-									<span class="Hour">16:00</span></li>
-								<li>
-									<ul class="change Title changeOne TitleBg">
-										<li class="newsOne newsTwo"><span>您的订单已经准备出库，</span> <span>货运单号：11176753698</span>
-											<span class="newsTwo_last">物流联系方式：1898206037</span></li>
-										<li class="name"><p>派车</p></li>
-										<li class="name"><p>川A2JJ13</p></li>
-										<li class="name"><p>苟凯</p></li>
-									</ul>
-								</li>
-							</ul>
-							<ul class="contentNews elementTwo">
-								<li class="time"><span class="stateFont fontColor">2015-12-04</span>
-									<span class="Hour">16:00</span></li>
-								<li>
-									<ul class="change Title changeColor">
-										<li class="newsOne newsTwo"><span>您的订单已经准备出库，</span> <span>货运单号：11176753698</span>
-											<span class="newsTwo_last">物流联系方式：1898206037</span></li>
-										<li class="name"><p>派车</p></li>
-										<li class="name"><p>川A2JJ13</p></li>
-										<li class="name"><p>
-												苟凯 <img src="images/JT，1.png" />
-											</p></li>
-									</ul>
-								</li>
-							</ul>
-							<ul class="contentNews elementOne dd">
-								<li class="time"><span class="stateFont fontColor"></span>
-									<span class="Hour">14:00</span></li>
-								<li>
-									<ul class="change Title changeOne TitleBg">
-										<li class="news">
-											<p>您的订单已经准备出库，正在经过四川省成都市高新区天府二街198号泸州老窖大厦1903</p> <span>货运单号：11176753698</span>
-											<span>物流联系方式：1898206037</span>
-										</li>
-										<li class="name"><p>派车</p></li>
-										<li class="name"><p>川A2JJ13</p></li>
-										<li class="name"><p>苟凯</p></li>
-									</ul>
-								</li>
-							</ul>
-							<ul class="contentNews elementOne dd">
-								<li class="time"><span class="stateFont fontColor"></span>
-									<span class="Hour">12:00</span></li>
-								<li>
-									<ul class="change Title changeOne TitleBg">
-										<li class="newsOne newsTwo"><span>您的订单已经准备出库，</span> <span>货运单号：11176753698</span>
-											<span class="newsTwo_last">物流联系方式：1898206037</span></li>
-										<li class="name"><p>派车</p></li>
-										<li class="name"><p>川A2JJ13</p></li>
-										<li class="name"><p>苟凯</p></li>
-									</ul>
-								</li>
-							</ul>
-							<ul class="contentNews elementTwo">
-								<li class="time"><span class="stateFont fontColor">2015-12-04</span>
-									<span class="Hour">16:00</span></li>
-								<li>
-									<ul class="change Title changeColor">
-										<li class="newsOne newsTwo"><span>您的订单已经准备出库，</span> <span>货运单号：11176753698</span>
-											<span class="newsTwo_last">物流联系方式：1898206037</span></li>
-										<li class="name"><p>派车</p></li>
-										<li class="name"><p>川A2JJ13</p></li>
-										<li class="name"><p>
-												苟凯 <img src="images/JT，1.png" />
-											</p></li>
-									</ul>
-								</li>
-							</ul>
-							<ul class="contentNews elementOne dd">
-								<li class="time"><span class="stateFont fontColor"></span>
-									<span class="Hour">16:00</span></li>
-								<li>
-									<ul class="change Title changeOne TitleBg">
-										<li class="newsOne">
-											<p>您的订单已经准备出库，正在经过四川省成都市高新区天府二街198号泸州老窖大厦1903</p> <span>货运单号：11176753698</span>
-											<span>物流联系方式：1898206037</span>
-										</li>
-										<li class="name"><p>派车</p></li>
-										<li class="name"><p>川A2JJ13</p></li>
-										<li class="name"><p>苟凯</p></li>
-									</ul>
-								</li>
-							</ul>
-							<ul class="contentNews elementOne dd">
-								<li class="time"><span class="stateFont fontColor"></span>
-									<span class="Hour">16:00</span></li>
-								<li>
-									<ul class="change Title changeOne TitleBg">
-										<li class="newsOne newsTwo"><span>您的订单已经准备出库，</span> <span>货运单号：11176753698</span>
-											<span class="newsTwo_last">物流联系方式：1898206037</span></li>
-										<li class="name"><p>派车</p></li>
-										<li class="name"><p>川A2JJ13</p></li>
-										<li class="name"><p>苟凯</p></li>
-									</ul>
-								</li>
-							</ul>
+							<div id='test' style='margin-top:10px;float:left;width:100%'></div>
 						</div>
 					</div>
 					<!-- 订单跟踪底部区域-->
@@ -364,9 +226,9 @@ body {
 							<li><p>承运商</p>
 								<span>中国物流有限公司</span></li>
 							<li><p>运输方式</p>
-								<span>公路</span></li>
+								<span id="F_YSFSSpan"></span></li>
 							<li><p>批次号</p>
-								<span>____</span></li>
+								<span id="F_PCHSpan">____</span></li>
 						</ul>
 					</div>
 					<!-- 订单跟踪底部区域结束-->
