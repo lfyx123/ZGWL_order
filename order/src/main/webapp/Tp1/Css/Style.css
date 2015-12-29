@@ -308,14 +308,18 @@ font-size:12px;}
 {width:80px; height:80px; border-radius:50%; background:#434261; float:left; position:relative; margin:36px 102px 59px 0px;}
 .schedule .scheduleBg
 {background:rgba(0,0,0,0);border:1px solid #434261;}
+.schedule li
+{width:80px; height:80px; border-radius:50%; background:#434261; float:left; position:relative; margin:36px 80px 59px 0px;}
+.schedule li:nth-child(1)
+{margin-left:94px;}
+.schedule .scheduleBg
+{background:rgba(0,0,0,0);border:1px solid #434261;}
 .schedule li img
 {width:42px; height:42px; position:absolute; top:20px; left:20px;}
 .schedule li span
-{ width:102px;height:8px; background:url(../../../js/ZT,6.png); margin:36px 80px; float:left;}
+{width:80px;height:8px; background:url(../../../js/ZT,7.png); margin:36px 80px; float:left;}
 .schedule li span.firat
-{background:url(../../../js/ZT-6.png);}
-.schedule .first
-{margin-left:132px;}
+{background:url(../../../js/ZT-7.png);}
 .schedule li p
 {text-align:center; padding-top:92px;}
 

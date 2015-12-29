@@ -3,6 +3,8 @@ $(function() {
 	var F_KHQSDtmp;
 	var F_KFZYDtmp;
 	var F_KHDDBHtmp;
+	var F_SHLLRtmp;
+	var F_SHRLLFStmp;
 	
 	var rightHeight = $("#right").height();
 	var leftHeight = $("#left").height();
@@ -98,14 +100,20 @@ $(function() {
 		var F_KHQSDtmp2 = $(this).find('p').html();
 		var F_XMLXBHtmp2 = F_XMLXBHtmp;
 		var F_KFZYDtmp2 = F_KFZYDtmp;
-		var F_KHDDBHtmp2 = F_KHDDBHtmp;
+		var F_SHLLRtmp2 = F_SHLLRtmp;
+		var F_SHRLLFStmp2 = F_SHRLLFStmp;
 		
 		var data = {};
 		data['F_XMLXBH'] = F_XMLXBHtmp2;
 		data['F_KHQSD'] = F_KHQSDtmp2;
 		data['F_KFZYD'] = F_KFZYDtmp2;
-		data['F_KHDDBH'] = F_KHDDBHtmp2;
-		test(data);
+		data['F_KHDDBH'] = $("#KHDDtxt").val();
+		data['F_SHLLR'] = F_SHLLRtmp2;
+		data['F_SHRLLFS'] = F_SHRLLFStmp2;
+		
+		$(this).find("p").addClass("current").parent().siblings().find("p").removeClass("current");
+		
+		getOrderInfo(data);
 	});
 	
 	/**
@@ -144,6 +152,19 @@ $(function() {
 	/**
 	 * @author LYL
 	 * @date 2015年12月20日
+	 * 查询条件hover事件
+	 */
+	$("#ConitionKHQSDul").on('mouseover mouseout','li', function(event) {
+		if (event.type == 'mouseover') {
+			$(this).addClass("ConitionCol");
+		} else {
+			$(this).removeClass("ConitionCol");
+		}
+	});
+	
+	/**
+	 * @author LYL
+	 * @date 2015年12月20日
 	 * 订单跟踪点击切换样式
 	 */
 	$("#DDGZDiv").on('click','.elementOne',
@@ -164,23 +185,55 @@ $(function() {
 	 */
 	$('#ConitionKHDDul').on('click','li',function() {
 		var F_XMLXBH = $($(this).find('.F_XMLXBH')[0]).text();
-		var F_KHQSD = $($(this).find('.F_KHQSD')[0]).text();
 		var F_KFZYD = $($(this).find('.F_KFZYD')[0]).text();
 		var F_KHDDBH = $("#KHDDtxt").val();
+		var F_SHLLR = $($(this).find('.F_SHLLRVAL')[0]).text();
+		var F_SHRLLFS = $($(this).find('.F_SHRLLFSVAL')[0]).text();
 		$('.Conition').hide();
 		$('.Display').hide();
 		var data = {};
 		data['F_XMLXBH'] = F_XMLXBH;
-		data['F_KHQSD'] = F_KHQSD;
 		data['F_KFZYD'] = F_KFZYD;
 		data['F_KHDDBH'] = F_KHDDBH;
+		data['F_SHLLR'] = F_SHLLR;
+		data['F_SHRLLFS'] = F_SHRLLFS;
 		
 		F_XMLXBHtmp = F_XMLXBH;
-		F_KHQSDtmp = F_KHQSD;
 		F_KFZYDtmp = F_KFZYD;
 		F_KHDDBHtmp = F_KHDDBH;
+		F_SHLLRtmp = F_SHLLR;
+		F_SHRLLFStmp = F_SHRLLFS;
 		
-		test(data);
+		getOrderInfo(data);
+	});
+	
+	/**
+	 * @author LYL
+	 * @date 2015年12月20日
+	 * 查询条件选中事件
+	 */
+	$('#ConitionKHQSDul').on('click','li',function() {
+		var F_XMLXBH = $($(this).find('.F_XMLXBH')[0]).text();
+		var F_KFZYD = $($(this).find('.F_KFZYD')[0]).text();
+		var F_KHDDBH = $($(this).find('.F_KHDDBH')[0]).text();
+		var F_SHLLR = $($(this).find('.F_SHLLRVAL')[0]).text();
+		var F_SHRLLFS = $($(this).find('.F_SHRLLFSVAL')[0]).text();
+		$('.Conition').hide();
+		$('.Display').hide();
+		var data = {};
+		data['F_XMLXBH'] = F_XMLXBH;
+		data['F_KFZYD'] = F_KFZYD;
+		data['F_KHDDBH'] = F_KHDDBH;
+		data['F_SHLLR'] = F_SHLLR;
+		data['F_SHRLLFS'] = F_SHRLLFS;
+		
+		F_XMLXBHtmp = F_XMLXBH;
+		F_KFZYDtmp = F_KFZYD;
+		F_KHDDBHtmp = F_KHDDBH;
+		F_SHLLRtmp = F_SHLLR;
+		F_SHRLLFStmp = F_SHRLLFS;
+		
+		getOrderInfo(data);
 	});
 
 	/**
@@ -193,18 +246,53 @@ $(function() {
 						$
 								.ajax({
 									type : 'post',
-									url : "http://localhost:8081/new_frame/order/khddbtn",
+									url : "http://117.79.231.114:8081/new_frame/order/khddbtn",
 									dataType : 'jsonp',
 									jsonpCallback : 'callback',
 									data : {
-										'khddbh' : $('#KHDDtxt').val()
+										'khddbh' : $('#KHDDtxt').val()==null?"无订单":$('#KHDDtxt').val()
 									},
 									success : function(data) {
+										if(data.resultMap.KHDDList.length==0)
+										{
+											$('.Display').hide();
+											$('#NoneKHDDSpan').css("visibility","visible");
+											setTimeout(function () {
+												$('#NoneKHDDSpan').css("visibility","hidden");
+										    }, 2000);
+											return false;
+										}
+										if(data.resultMap.KHDDList.length==1)
+										{
+											var F_XMLXBHtmp2 = data.resultMap.KHDDList[0]['F_XMLXBH'];
+											var F_KFZYDtmp2 = data.resultMap.KHDDList[0]['F_KFZYD'];
+											F_XMLXBHtmp = data.resultMap.KHDDList[0]['F_XMLXBH'];
+											F_KFZYDtmp = data.resultMap.KHDDList[0]['F_KFZYD'];
+											F_KHDDBHtmp = data.resultMap.KHDDList[0]['F_KHDDBH'];
+											F_SHLLRtmp = data.resultMap.KHDDList[0]['F_SHLLRVAL'];
+											F_SHRLLFStmp = data.resultMap.KHDDList[0]['F_SHRLLFSVAL'];
+											var data2 = {};
+											data2['F_XMLXBH'] = F_XMLXBHtmp2;
+											data2['F_KFZYD'] = F_KFZYDtmp2;
+											data2['F_KHDDBH'] = $('#KHDDtxt').val();
+											getOrderInfo(data2);
+											$('.Conition').hide();
+											$('.Display').hide();
+											return false;
+										}
+										
 										var str ="";
 										$.each(data.resultMap.KHDDList, function(name, value) {
-											str = str + '<li class="ConitionLi"><span>'+value.F_XMLXMC+'</span>'+'<span class="F_XMLXBH">'+value.F_XMLXBH+'</span>'
-												+ '<span class="F_KHQSD">'+value.F_KHQSD+'</span> <span class="F_KFZYD">'+value.F_KFZYD+'</span> <span>'+value.F_SHLLR+'</span>'
-												+ '<span>'+value.F_SHRLLFS+'</span></li>';
+															str = str
+																	+ '<li class="ConitionLi"><span>'
+																	+ value.F_XMLXMC
+																	+ '</span>'
+																	+ '<span class="F_XMLXBH" style="display:none">'+value.F_XMLXBH+'</span>'
+												+ '<span class="F_KFZYD">'+value.F_KFZYD+'</span> <span class="F_SHLLR">'+value.F_SHLLR+'</span>'
+												+ '<span class="F_SHRLLFS">'+value.F_SHRLLFS+'</span>'
+												+ '<span class="F_SHLLRVAL" style="display:none">'+value.F_SHLLRVAL+'</span>'
+												+ '<span class="F_SHRLLFSVAL" style="display:none">'+value.F_SHRLLFSVAL+'</span>'
+												+ '</li>';
 										     
 										});
 										$('#ConitionKHDDul').html(str);
@@ -216,13 +304,79 @@ $(function() {
 								});
 
 					});
+	/**
+	 * @author LYL
+	 * @date 2015年12月20日 客户签收单查询按钮
+	 */
+	$("#KHQSDbtn")
+	.click(
+			function() {
+				$
+						.ajax({
+							type : 'post',
+							url : "http://117.79.231.114:8081/new_frame/order/khqsdbtn",
+							dataType : 'jsonp',
+							jsonpCallback : 'callback',
+							data : {
+								'khqsd' : $('#KHQSDtxt').val()==""?"无签收单":$('#KHQSDtxt').val()
+							},
+							success : function(data) {
+								if(data.resultMap.KHDDList.length==0)
+								{
+									$('.Display').hide();
+									$('#NoneKHQSDSpan').css("visibility","visible");
+									setTimeout(function () {
+										$('#NoneKHQSDSpan').css("visibility","hidden");
+								    }, 2000);
+									return false;
+								}
+								if(data.resultMap.KHDDList.length==1)
+								{
+									var F_XMLXBHtmp2 = data.resultMap.KHDDList[0]['F_XMLXBH'];
+									var F_KFZYDtmp2 = data.resultMap.KHDDList[0]['F_KFZYD'];
+									F_XMLXBHtmp = data.resultMap.KHDDList[0]['F_XMLXBH'];
+									F_KFZYDtmp = data.resultMap.KHDDList[0]['F_KFZYD'];
+									F_KHDDBHtmp = data.resultMap.KHDDList[0]['F_KHDDBH'];
+									F_SHLLRtmp = data.resultMap.KHDDList[0]['F_SHLLRVAL'];
+									F_SHRLLFStmp = data.resultMap.KHDDList[0]['F_SHRLLFSVAL'];
+									var data2 = {};
+									data2['F_XMLXBH'] = F_XMLXBHtmp2;
+									data2['F_KFZYD'] = F_KFZYDtmp2;
+									data2['F_KHQSD'] = $('#KHQSDtxt').val();
+									getOrderInfo(data2);
+									$('.Conition').hide();
+									$('.Display').hide();
+									return false;
+								}
+								
+								var str ="";
+								$.each(data.resultMap.KHDDList, function(name, value) {
+									str = str + '<li class="ConitionLi"><span>'+value.F_XMLXMC+'</span>'+'<span class="F_XMLXBH" style="display:none">'+value.F_XMLXBH+'</span>'
+										+ '<span class="F_KFZYD">'+value.F_KFZYD+'</span> <span class="F_SHLLR">'+value.F_SHLLR+'</span>'
+										+ '<span class="F_KHDDBH">'+value.F_KHDDBH+'</span>'
+										+ '<span class="F_SHRLLFS">'+value.F_SHRLLFS+'</span>'
+										+ '<span class="F_SHLLRVAL" style="display:none">'+value.F_SHLLRVAL+'</span>'
+										+ '<span class="F_SHRLLFSVAL" style="display:none">'+value.F_SHRLLFSVAL+'</span>'
+										+ '</li>';
+								     
+								});
+								$('#ConitionKHQSDul').html(str);
+								$('.Conition').show();
+							},
+							error : function(XMLHttpRequest,
+									textStatus, errorThrown) {
+							}
+						});
+
+			});
 });
 
-function test(data)
+
+function getOrderInfo(data)
 {
 	$.ajax({
 		type : 'post',
-		url : "http://localhost:8081/new_frame/order/orderfun",
+		url : "http://117.79.231.114:8081/new_frame/order/orderfun",
 		dataType : 'jsonp',
 		jsonpCallback : 'callback',
 		data : data,
@@ -235,19 +389,19 @@ function test(data)
 			$('#YSLXSpan').html(json['resultMap']['KHDD']['YSLX']);
 			$('#WLLXSpan').html(json['resultMap']['KHDD']['WLLX']);
 			$('#KFZYDSpan').html(json['resultMap']['KHDD']['KFZYD']);
-			
+			$("#F_KHDDBHSpan").html(json['resultMap']['KHDD']['F_KHDDBH']);
+			$("#F_DDZTSpan").html(json['resultMap']['KHDD']['F_DDZT']);
 			var str="";
 			$.each(json['resultMap']['KHQSDList'],function(index,value){
-				console.log(this['F_KHQSD']);
-				if(index==0)
+				if(value!=null&&index==0)
 				{
 					str = str + "<li class='newline'><p>"+this['F_KHQSD']+"</p></li>";
 				}
-				else if(index%7==0)
+				else if(value!=null&&index%7==0)
 				{
 					str = str + "<li class='track newline'><p>"+this['F_KHQSD']+"</p></li>";
 				}
-				else
+				else if(value!=null)
 				{
 					str = str + "<li class='margin newline'><p>"+this['F_KHQSD']+"</p></li>";
 				}
@@ -316,6 +470,19 @@ function button_on(col) {
 	col.style.background = "#fff";
 };
 function blinkitKHDD(col) {
+	intrvl = 0;
+	for (nTimes = 0; nTimes < 1; nTimes++) {
+		intrvl += 30;
+		setTimeout(function() {
+			button_onclick(col)
+		}, intrvl);
+		intrvl += 30;
+		setTimeout(function() {
+			button_on(col)
+		}, intrvl);
+	}
+};
+function blinkitKHQSD(col) {
 	intrvl = 0;
 	for (nTimes = 0; nTimes < 1; nTimes++) {
 		intrvl += 30;

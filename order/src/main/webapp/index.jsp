@@ -73,7 +73,8 @@ body {
 						<span class="stateFont Font select" id="KHDDspan">客户订单号</span><span class="stateFont Font FontMargin" id="KHQSDspan">客户签收订单号</span>
 					</div>
 					<div id="queryKHDD" class="query">
-						<div class="center">
+						<div class="center" style="height:80px;">
+							<span style="display:block;margin-top:10px;color:red;visibility:hidden" id="NoneKHDDSpan">找不到该订单，请重新输入！</span>
 							<div class="search">
 								<input type="text" class="input" placeholder="请输入客户订单号 " id="KHDDtxt"/> <input
 									type="button" class="queryClick" style="cursor: pointer" id="KHDDbtn"
@@ -94,11 +95,12 @@ body {
 						</div>
 					</div>
 					<div id="queryKHQSD" class="query" hidden="true">
-						<div class="center">
+						<div class="center" style="height:80px;">
+							<span style="display:block;margin-top:10px;color:red;visibility:hidden" id="NoneKHQSDSpan">找不到该签收单，请重新输入！</span>
 							<div class="search">
-								<input type="text" class="input" placeholder="请输入客户签收单号 " /> <input
-									type="button" class="queryClick" style="cursor: pointer"
-									onclick="blinkit(this)" value="查询" />
+								<input type="text" class="input" placeholder="请输入客户签收单号 " id="KHQSDtxt"/> <input
+									type="button" class="queryClick" style="cursor: pointer"  id="KHQSDbtn"
+									onclick="blinkitKHQSD(this)" value="查询" />
 							</div>
 						</div>
 						<div class="Conition">
@@ -106,19 +108,8 @@ body {
 								请选择<span>X</span>
 							</div>
 							<div class="Gray"></div>
-							<ul>
-								<li class="ConitionCol"><span class="ConitionOn">项目名称精品特曲</span>
-									<span>30157004</span> <span>50246592</span> <span>某先生/女士</span>
-									<span>123****5565</span></li>
-								<li><span class="ConitionOn">精品特曲</span> <span>30157004</span>
-									<span>50246592</span> <span>姚先生/女士</span> <span>159****6785</span>
-								</li>
-								<li><span class="ConitionOn">项目名称精品特曲</span> <span>30157004</span>
-									<span>50246592</span> <span>某先生/女士</span> <span>123****5565</span>
-								</li>
-								<li><span class="ConitionOn">精品特曲酒</span> <span>30157004</span>
-									<span>50246592</span> <span>何先生/女士</span> <span>138****5565</span>
-								</li>
+							<ul id="ConitionKHQSDul">
+								
 							</ul>
 
 						</div>
@@ -131,8 +122,8 @@ body {
 				<div id="border">
 					<div class="center">
 						<div class="state">
-							<span class="stateFont">订单号<span class="Font">11223</span></span>
-							<span class="stateFont">订单状态<span class="Font">已起运</span></span>
+							<span class="stateFont">订单号<span class="Font" id="F_KHDDBHSpan"></span></span>
+							<span class="stateFont">订单状态<span class="Font" id="F_DDZTSpan"></span></span>
 
 							<ul class="schedule">
 								<li class="first scheduleBg" id="ZT_1"><img src="images/ZT,1.png" /><span
@@ -183,7 +174,7 @@ body {
 								<li><p>紧急程度</p>
 									<span id='JJCDSpan'></span></li>
 								<li><p>运输类型</p>
-									<span id='YSLXSpan'>门到门</span></li>
+									<span id='YSLXSpan'></span></li>
 							</ul>
 						</div>
 						<div class="fixed Font_Color TopColor">
