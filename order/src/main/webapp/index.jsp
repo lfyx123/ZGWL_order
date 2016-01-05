@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -20,7 +22,7 @@ body {
 <script type="text/javascript" src="Tp1/JScript/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="Tp1/JScript/Comm.js"></script>
 <script type="text/javascript" src="Tp1/JScript/SlideClass.js"></script>
-<script type="text/javascript" src="Tp1/sysResource/index.js"></script>
+<script type="text/javascript" src="Tp1/sysResource/index.js" charset="gb2312"></script>
 </head>
 <body>
 	<div class="Display"></div>
@@ -36,7 +38,7 @@ body {
 
 				<ul>
 					<li><a href="index.php">网站首页</a></li>
-					<li class="onfocus"><a href="IntroNews.php?tag=gywm">关于我们</a></li>
+					<li><a href="IntroNews.php?tag=gywm">关于我们</a></li>
 					<li><a href="IntroNews.php?tag=ywlx">业务类型</a></li>
 					<li><a href="News_List.php?tag=GuestBook">客户服务</a></li>
 					<li><a href="News_List.php?tag=xwzx">新闻中心</a></li>
@@ -70,7 +72,7 @@ body {
 			<div id="contentContent">
 				<div id="queryOne">
 					<div class="state">
-						<span class="stateFont Font select" id="KHDDspan">客户订单号</span><span class="stateFont Font FontMargin" id="KHQSDspan">客户签收订单号</span>
+						<span class="stateFont Font select" id="KHDDspan">客户订单号</span><span class="stateFont Font FontMargin" id="KHQSDspan">客户签收单号</span>
 					</div>
 					<div id="queryKHDD" class="query">
 						<div class="center" style="height:80px;">
@@ -100,7 +102,7 @@ body {
 							<div class="search">
 								<input type="text" class="input" placeholder="请输入客户签收单号 " id="KHQSDtxt"/> <input
 									type="button" class="queryClick" style="cursor: pointer"  id="KHQSDbtn"
-									onclick="blinkitKHQSD(this)" value="查询" />
+									onclick="blinkitKHQSD(this)" value="查询"/>
 							</div>
 						</div>
 						<div class="Conition">
@@ -164,9 +166,9 @@ body {
 								<li><p>客户签收单</p>
 									<span id="F_KHQSDSpan"></span></li>
 								<li><p>发送方</p>
-									<span>中国物流有限公司</span></li>
+									<span id="F_FSFSpan" style="display:none">中国物流有限公司</span></li>
 								<li><p>总路程数</p>
-									<span id="LCSpan"></span></li>
+									<span id="LCSpan"></span><span id="KMSpan" style="display:none">千米</span></li>
 							</ul>
 						</div>
 						<div class="fixed Font_Color TopColor">
@@ -186,7 +188,7 @@ body {
 						<div class="fixed Font_Color TopColor">
 							<ul class="Width">
 								<li>
-									<p>客房作业单</p> <span id='KFZYDSpan'></span>
+									<p>库房作业单</p> <span id='KFZYDSpan'></span>
 								</li>
 							</ul>
 						</div>
@@ -208,14 +210,14 @@ body {
 								<li class="name"><p>车牌号</p></li>
 								<li class="name"><p>跟踪人</p></li>
 							</ul>
-							<div id='test' style='margin-top:10px;float:left;width:100%'></div>
+							<div id="ddgz" style='margin-top:10px;float:left;width:100%'></div>
 						</div>
 					</div>
 					<!-- 订单跟踪底部区域-->
 					<div class="fixed changeColor">
 						<ul class="MarginLeft Font_Color">
 							<li><p>承运商</p>
-								<span>中国物流有限公司</span></li>
+								<span style="display:none" id="CYSSpan">中国物流有限公司</span></li>
 							<li><p>运输方式</p>
 								<span id="F_YSFSSpan"></span></li>
 							<li><p>批次号</p>

@@ -1,3 +1,5 @@
+var SEARCH_TYPE_BTN='BTN'; //查询按钮查询
+var SEARCH_TYPE_CLICK='CLICK'; //点击签收单查询
 $(function() {
 	var F_XMLXBHtmp;
 	var F_KHQSDtmp;
@@ -5,6 +7,7 @@ $(function() {
 	var F_KHDDBHtmp;
 	var F_SHLLRtmp;
 	var F_SHRLLFStmp;
+	var SEARCH_STYLE = 'KHDD';
 	
 	var rightHeight = $("#right").height();
 	var leftHeight = $("#left").height();
@@ -71,7 +74,58 @@ $(function() {
 		$('.Display').hide()
 	});
 	$('.ConitionTitle span').click(function() {
-		$('.Conition').hide()
+		$("#KHDDbtn").removeAttr("disabled");
+		$("#KHQSDbtn").removeAttr("disabled");
+		$('.Conition').hide();
+	});
+	
+	$("#queryKHDD,#borderLast,#border").on("mouseover mouseout",function(event){
+		 if(event.type == "mouseover"){
+			  //鼠标悬浮
+			  $(this).css("border","1px solid #434261");
+			 }else if(event.type == "mouseout"){
+			  //鼠标离开
+			  $(this).css("border","1px solid #c9c9c9");
+			 }
+	});
+	
+	$("#queryKHQSD,#borderLast,#border").on("mouseover mouseout",function(event){
+		 if(event.type == "mouseover"){
+			  //鼠标悬浮
+			  $(this).css("border","1px solid #434261");
+			 }else if(event.type == "mouseout"){
+			  //鼠标离开
+			  $(this).css("border","1px solid #c9c9c9");
+			 }
+	});
+	
+	$('.Display').click(function(){
+		$("#KHDDbtn").removeAttr("disabled");
+		$("#KHQSDbtn").removeAttr("disabled");
+	    $('.Display').hide();
+		$('.Conition').hide();
+	});
+	
+	/**
+	 * @author LYL
+	 * @date 2015年12月20日
+	 * 回车按钮
+	 */
+	$('#KHQSDtxt').keydown(function(e){
+		if(e.keyCode==13){
+			$('#KHQSDbtn').click();
+		}
+	});
+	
+	/**
+	 * @author LYL
+	 * @date 2015年12月20日
+	 * 回车按钮
+	 */
+	$('#KHDDtxt').keydown(function(e){
+		if(e.keyCode==13){
+			$('#KHDDbtn').click();
+		}
 	});
 	
 	/**
@@ -97,7 +151,14 @@ $(function() {
 	 * 点击客户签收单查询订单信息
 	 */
 	$('#KHQSDUl').on('click','li',function(){
-		var F_KHQSDtmp2 = $(this).find('p').html();
+		var F_KHQSDtmp2;
+		if($(this).find('p').html()==null||$(this).find('p').html()=="")
+		{
+			F_KHQSDtmp2 = "-1";
+		}else
+		{
+			F_KHQSDtmp2 = $(this).find('p').html();
+		}
 		var F_XMLXBHtmp2 = F_XMLXBHtmp;
 		var F_KFZYDtmp2 = F_KFZYDtmp;
 		var F_SHLLRtmp2 = F_SHLLRtmp;
@@ -105,15 +166,19 @@ $(function() {
 		
 		var data = {};
 		data['F_XMLXBH'] = F_XMLXBHtmp2;
-		data['F_KHQSD'] = F_KHQSDtmp2;
 		data['F_KFZYD'] = F_KFZYDtmp2;
-		data['F_KHDDBH'] = $("#KHDDtxt").val();
+		if(SEARCH_STYLE == 'KHDD')
+		{
+			data['F_KHDDBH'] = $("#KHDDtxt").val();
+		}
+		data['F_KHQSD'] = F_KHQSDtmp2;
+		
 		data['F_SHLLR'] = F_SHLLRtmp2;
 		data['F_SHRLLFS'] = F_SHRLLFStmp2;
 		
 		$(this).find("p").addClass("current").parent().siblings().find("p").removeClass("current");
 		
-		getOrderInfo(data);
+		getOrderInfo(data,SEARCH_TYPE_CLICK);
 	});
 	
 	/**
@@ -124,6 +189,7 @@ $(function() {
 	$("#KHDDspan").on("click", function() {
 		$("#queryKHDD").removeAttr("hidden");
 		$("#queryKHQSD").attr("hidden", "true");
+		SEARCH_STYLE = 'KHDD';
 	});
 	
 	/**
@@ -134,6 +200,7 @@ $(function() {
 	$("#KHQSDspan").on("click", function() {
 		$("#queryKHQSD").removeAttr("hidden");
 		$("#queryKHDD").attr("hidden", "true");
+		SEARCH_STYLE = 'KHQSD';
 	})
 
 	/**
@@ -186,7 +253,14 @@ $(function() {
 	$('#ConitionKHDDul').on('click','li',function() {
 		var F_XMLXBH = $($(this).find('.F_XMLXBH')[0]).text();
 		var F_KFZYD = $($(this).find('.F_KFZYD')[0]).text();
-		var F_KHDDBH = $("#KHDDtxt").val();
+		var F_KHDDBH;
+		if($("#KHDDtxt").val()==null||$("#KHDDtxt").val()=="")
+		{
+			F_KHDDBH = "-1"
+		}else
+		{
+			F_KHDDBH = $("#KHDDtxt").val();
+		}
 		var F_SHLLR = $($(this).find('.F_SHLLRVAL')[0]).text();
 		var F_SHRLLFS = $($(this).find('.F_SHRLLFSVAL')[0]).text();
 		$('.Conition').hide();
@@ -204,7 +278,7 @@ $(function() {
 		F_SHLLRtmp = F_SHLLR;
 		F_SHRLLFStmp = F_SHRLLFS;
 		
-		getOrderInfo(data);
+		getOrderInfo(data,SEARCH_TYPE_BTN);
 	});
 	
 	/**
@@ -233,7 +307,7 @@ $(function() {
 		F_SHLLRtmp = F_SHLLR;
 		F_SHRLLFStmp = F_SHRLLFS;
 		
-		getOrderInfo(data);
+		getOrderInfo(data,SEARCH_TYPE_BTN);
 	});
 
 	/**
@@ -243,6 +317,8 @@ $(function() {
 	$("#KHDDbtn")
 			.click(
 					function() {
+						var btn = $(this);
+						btn.attr("disabled","disabled");
 						$
 								.ajax({
 									type : 'post',
@@ -250,12 +326,13 @@ $(function() {
 									dataType : 'jsonp',
 									jsonpCallback : 'callback',
 									data : {
-										'khddbh' : $('#KHDDtxt').val()==null?"无订单":$('#KHDDtxt').val()
+										'khddbh' : ($('#KHDDtxt').val()==null||$('#KHDDtxt').val()=="")?"无订单":$('#KHDDtxt').val()
 									},
 									success : function(data) {
 										if(data.resultMap.KHDDList.length==0)
 										{
 											$('.Display').hide();
+											btn.removeAttr("disabled");
 											$('#NoneKHDDSpan').css("visibility","visible");
 											setTimeout(function () {
 												$('#NoneKHDDSpan').css("visibility","hidden");
@@ -275,7 +352,7 @@ $(function() {
 											data2['F_XMLXBH'] = F_XMLXBHtmp2;
 											data2['F_KFZYD'] = F_KFZYDtmp2;
 											data2['F_KHDDBH'] = $('#KHDDtxt').val();
-											getOrderInfo(data2);
+											getOrderInfo(data2,SEARCH_TYPE_BTN);
 											$('.Conition').hide();
 											$('.Display').hide();
 											return false;
@@ -300,6 +377,7 @@ $(function() {
 									},
 									error : function(XMLHttpRequest,
 											textStatus, errorThrown) {
+										btn.removeAttr("disabled");
 									}
 								});
 
@@ -311,6 +389,8 @@ $(function() {
 	$("#KHQSDbtn")
 	.click(
 			function() {
+				var btn = $(this);
+				btn.attr("disabled","disabled");
 				$
 						.ajax({
 							type : 'post',
@@ -325,6 +405,7 @@ $(function() {
 								{
 									$('.Display').hide();
 									$('#NoneKHQSDSpan').css("visibility","visible");
+									btn.removeAttr("disabled");
 									setTimeout(function () {
 										$('#NoneKHQSDSpan').css("visibility","hidden");
 								    }, 2000);
@@ -343,7 +424,7 @@ $(function() {
 									data2['F_XMLXBH'] = F_XMLXBHtmp2;
 									data2['F_KFZYD'] = F_KFZYDtmp2;
 									data2['F_KHQSD'] = $('#KHQSDtxt').val();
-									getOrderInfo(data2);
+									getOrderInfo(data2,SEARCH_TYPE_BTN);
 									$('.Conition').hide();
 									$('.Display').hide();
 									return false;
@@ -365,6 +446,7 @@ $(function() {
 							},
 							error : function(XMLHttpRequest,
 									textStatus, errorThrown) {
+								btn.removeAttr("disabled");
 							}
 						});
 
@@ -372,41 +454,48 @@ $(function() {
 });
 
 
-function getOrderInfo(data)
+function getOrderInfo(data,type)
 {
 	$.ajax({
 		type : 'post',
 		url : "http://117.79.231.114:8081/new_frame/order/orderfun",
 		dataType : 'jsonp',
+		async: false,
 		jsonpCallback : 'callback',
 		data : data,
 		contentType:'application/json;charset=utf-8',
 		success : function(json) {
 			$('#F_XMLXMCSpan').html(json['resultMap']['KHDD']['XMMC']);
 			$('#F_KHQSDSpan').html(json['resultMap']['KHDD']['KHQSD']);
+			$('#F_FSFSpan').show();
+			$('#CYSSpan').show();
 			$('#LCSpan').html(json['resultMap']['KHDD']['LC']);
+			$('#KMSpan').show();
 			$('#JJCDSpan').html(json['resultMap']['KHDD']['JJCD']);
 			$('#YSLXSpan').html(json['resultMap']['KHDD']['YSLX']);
 			$('#WLLXSpan').html(json['resultMap']['KHDD']['WLLX']);
 			$('#KFZYDSpan').html(json['resultMap']['KHDD']['KFZYD']);
 			$("#F_KHDDBHSpan").html(json['resultMap']['KHDD']['F_KHDDBH']);
 			$("#F_DDZTSpan").html(json['resultMap']['KHDD']['F_DDZT']);
-			var str="";
-			$.each(json['resultMap']['KHQSDList'],function(index,value){
-				if(value!=null&&index==0)
-				{
-					str = str + "<li class='newline'><p>"+this['F_KHQSD']+"</p></li>";
-				}
-				else if(value!=null&&index%7==0)
-				{
-					str = str + "<li class='track newline'><p>"+this['F_KHQSD']+"</p></li>";
-				}
-				else if(value!=null)
-				{
-					str = str + "<li class='margin newline'><p>"+this['F_KHQSD']+"</p></li>";
-				}
-			});
-			$('#KHQSDUl').html(str);
+			if(type == SEARCH_TYPE_BTN)
+			{
+				var str="";
+				$.each(json['resultMap']['KHQSDList'],function(index,value){
+					if(value!=null&&index==0)
+					{
+						str = str + "<li class='newline current'><p>"+this['F_KHQSD']+"</p></li>";
+					}
+					else if(value!=null&&index%7==0)
+					{
+						str = str + "<li class='track newline'><p>"+this['F_KHQSD']+"</p></li>";
+					}
+					else if(value!=null)
+					{
+						str = str + "<li class='margin newline'><p>"+this['F_KHQSD']+"</p></li>";
+					}
+				});
+				$('#KHQSDUl').html(str);
+			}
 			
 			var str2 = "";
 			$.each(json['resultMap']['DDGZList'],function(index,value){
@@ -435,13 +524,13 @@ function getOrderInfo(data)
 					 + '<li class="name"><p>'+this['F_ZT']+'</p></li>'
 					 + '<li class="name"><p>'+this['CPH']+'</p></li>'
 					 + '<li class="name"><p>'
-					 + this['NAME']+' <img src="images/JT-1.png" />'
+					 + this['NAME']+''
 					 + '</p></li>'
 					 + '</ul>'
 					 + '</li>'
 					 + '</ul>';
 			});
-			$('#test').html(str2);
+			$('#ddgz').html(str2);
 			
 			$('#F_YSFSSpan').html(json['resultMap']['KHDD']['F_YSFS']);
 			$('#F_PCHSpan').html(json['resultMap']['KHDD']['F_PCH']);
@@ -457,41 +546,39 @@ function getOrderInfo(data)
 					$("#ZT_"+i).find('img').attr('src',"images/ZT-"+i+".png");
 				}
 			}
+			$("#KHDDbtn").removeAttr("disabled");
+			$("#KHQSDbtn").removeAttr("disabled");
 		},
 		error : function(XMLHttpRequest, textStatus, errorThrown) {
+			$("#KHDDbtn").removeAttr("disabled");
+			$("#KHQSDbtn").removeAttr("disabled");
 		}
 	});	
 }
 
 function button_onclick(col) {
 	col.style.background = "#434261";
+	col.style.color="#fff";
 };
 function button_on(col) {
 	col.style.background = "#fff";
+	col.style.color = "#434261";
 };
 function blinkitKHDD(col) {
-	intrvl = 0;
-	for (nTimes = 0; nTimes < 1; nTimes++) {
-		intrvl += 30;
-		setTimeout(function() {
-			button_onclick(col)
-		}, intrvl);
-		intrvl += 30;
+	intrvl_1=50,intrvl_2 =intrvl_1+ 10;
 		setTimeout(function() {
 			button_on(col)
-		}, intrvl);
-	}
+		}, intrvl_1);
+		setTimeout(function() {
+			button_onclick(col);
+		}, intrvl_2);
 };
 function blinkitKHQSD(col) {
-	intrvl = 0;
-	for (nTimes = 0; nTimes < 1; nTimes++) {
-		intrvl += 30;
-		setTimeout(function() {
-			button_onclick(col)
-		}, intrvl);
-		intrvl += 30;
+	intrvl_1=50,intrvl_2 =intrvl_1+ 10;
 		setTimeout(function() {
 			button_on(col)
-		}, intrvl);
-	}
+		}, intrvl_1);
+		setTimeout(function() {
+			button_onclick(col);
+		}, intrvl_2);
 }
